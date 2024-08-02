@@ -1,26 +1,26 @@
-// komponent pre zoznam potravín
-import "./FoodList.css";
+import "./FoodList.css"
 
-const FoodList = ({ printFood, setPrintFood }) => {
+const FoodList = ({ printFood, dispatch }) => {
   return (
     <div className="food-list">
-      {printFood.map((oneFood, index) => {
-        return (
-          <div className="printed-food" key={index}>
-            <p>{oneFood}</p>
-            <button
-              className="foodList-btn"
-              onClick={() => {
-                setPrintFood(printFood.filter((item) => item !== oneFood));
-              }}
-            >
-              x
-            </button>
-          </div>
-        );
-      })}
+      {printFood.map((oneFood, index) => (
+        <div className="printed-food" key={index}>
+          <p>{oneFood}</p>
+          <button
+            className="foodList-btn"
+            onClick={() => {
+              dispatch({
+                type: "setPrintFood",
+                payload: printFood.filter((item) => item !== oneFood),
+              })
+            }}
+          >
+            x
+          </button>
+        </div>
+      ))}
     </div>
-  );
-};
+  )
+}
 
-export default FoodList;
+export default FoodList

@@ -1,17 +1,20 @@
 // komponent pre zoznam receptov
-import "./RecipeList.css";
+import "./RecipeList.css"
 
-const RecipeList = ({ printRecipes, setPrintRecipes }) => {
+const RecipeList = ({ printRecipes, dispatch }) => {
   // definujeme funkciu, ktorá odoberie recept z printRecipes
   const handleRemove = (recipe) => {
-    setPrintRecipes(printRecipes.filter((item) => item !== recipe));
-  };
+    dispatch({
+      type: "setPrintRecipes",
+      payload: printRecipes.filter((item) => item !== recipe),
+    })
+  }
 
   return (
     <ol className="recipe-list">
       {printRecipes.map((recipe, index) => {
         const { label, image, ingredientLines, calories, url, totalNutrients } =
-          recipe;
+          recipe
 
         return (
           <li className="recipe-item" key={index}>
@@ -62,10 +65,10 @@ const RecipeList = ({ printRecipes, setPrintRecipes }) => {
               </div>
             </div>
           </li>
-        );
+        )
       })}
     </ol>
-  );
-};
+  )
+}
 
-export default RecipeList;
+export default RecipeList
