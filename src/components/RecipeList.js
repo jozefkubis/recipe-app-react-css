@@ -1,7 +1,10 @@
 // komponent pre zoznam receptov
+import { useRecipe } from "../contexts/RecipeContext"
 import "./RecipeList.css"
 
-const RecipeList = ({ printRecipes, dispatch }) => {
+const RecipeList = () => {
+  const { printRecipes, dispatch } = useRecipe()
+
   // definujeme funkciu, ktorá odoberie recept z printRecipes
   const handleRemove = (recipe) => {
     dispatch({

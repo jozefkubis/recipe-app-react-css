@@ -1,7 +1,10 @@
 // komponent pre formulár
+import { useRecipe } from "../contexts/RecipeContext"
 import "./SearchForm.css"
 
-const SearchForm = ({ searchingForFood, printFoodOnPg, dispatch }) => {
+const SearchForm = () => {
+  const { searchingForFood, printFoodOnPg, dispatch } = useRecipe()
+
   return (
     <form
       className="form"

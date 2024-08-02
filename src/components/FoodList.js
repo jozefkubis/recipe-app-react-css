@@ -1,6 +1,9 @@
+import { useRecipe } from "../contexts/RecipeContext"
 import "./FoodList.css"
 
-const FoodList = ({ printFood, dispatch }) => {
+const FoodList = () => {
+  const { printFood, dispatch } = useRecipe()
+
   return (
     <div className="food-list">
       {printFood.map((oneFood, index) => (
