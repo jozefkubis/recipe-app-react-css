@@ -5,7 +5,6 @@ import "./RecipeList.css"
 const RecipeList = () => {
   const { printRecipes, dispatch } = useRecipe()
 
-  // definujeme funkciu, ktorá odoberie recept z printRecipes
   const handleRemove = (recipe) => {
     dispatch({
       type: "setPrintRecipes",

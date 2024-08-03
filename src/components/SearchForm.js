@@ -2,18 +2,15 @@
 import { useRecipe } from "../contexts/RecipeContext"
 import "./SearchForm.css"
 
+function handleClick() {
+  document.querySelector(".empty-input").classList.remove("not-empty-input")
+}
+
 const SearchForm = () => {
   const { searchingForFood, printFoodOnPg, dispatch } = useRecipe()
 
   return (
-    <form
-      className="form"
-      onSubmit={printFoodOnPg}
-      onClick={() => {
-        const emptyInput = document.querySelector(".empty-input")
-        emptyInput.classList.remove("not-empty-input")
-      }}
-    >
+    <form className="form" onSubmit={printFoodOnPg} onClick={handleClick}>
       <input
         className="form-input"
         type="text"

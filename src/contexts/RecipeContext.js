@@ -28,34 +28,26 @@ function RecipeProvider({ children }) {
     initialState
   )
 
-  // efekt na získanie receptov podľa poľa printFood
   useEffect(() => {
     const printFoodJoin = printFood.join(",")
 
-    // asynchrónna funkcia na volanie getRecipes
     const fetchRecipes = async () => {
-      // čakáme na výsledok sľubu
       const recipes = await getRecipes(printFoodJoin)
-      // nastavujeme stav printRecipes na pole receptov
       dispatch({
         type: "setPrintRecipes",
         payload: recipes.hits.map((hit) => hit.recipe),
       })
 
-      const form = document.querySelector(".form")
-      const emptyInput = document.querySelector(".empty-input")
       if (!printFood.length) {
-        // odstránime "search-form" z className formulára
-        form.classList.remove("search-form")
-        emptyInput.classList.remove("not-empty-input")
+        document.querySelector(".form").classList.remove("search-form")
+        document
+          .querySelector(".empty-input")
+          .classList.remove("not-empty-input")
       }
     }
 
-    // zavoláme funkciu fetchRecipes
     fetchRecipes()
   }, [printFood])
-
-  // funkcia na pridanie novej potraviny do poľa printFood
 
   const printFoodOnPg = async (e) => {
     e.preventDefault()
@@ -65,20 +57,12 @@ function RecipeProvider({ children }) {
         type: "setPrintFood",
         payload: [...printFood, searchingForFood],
       })
-
       dispatch({ type: "setSearchingForFood", payload: "" })
 
-      // získame referenciu na formulár pomocou querySelector
-      const form = document.querySelector(".form")
-
-      // pridáme "search-form" do className formulára
-      form.classList.add("search-form")
-
-      const emptyInput = document.querySelector(".empty-input")
-      emptyInput.classList.remove("not-empty-input")
+      document.querySelector(".form").classList.add("search-form")
+      document.querySelector(".empty-input").classList.remove("not-empty-input")
     } else {
-      const notEmptyInput = document.querySelector(".empty-input")
-      notEmptyInput.classList.add("not-empty-input")
+      document.querySelector(".empty-input").classList.add("not-empty-input")
     }
   }
 
