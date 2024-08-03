@@ -17,6 +17,8 @@ function reducer(state, action) {
       return { ...state, printFood: action.payload }
     case "setPrintRecipes":
       return { ...state, printRecipes: action.payload }
+    case "clear":
+      return initialState
     default:
       throw new Error("Invalid action type")
   }

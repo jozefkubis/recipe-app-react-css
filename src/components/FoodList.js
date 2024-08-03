@@ -3,7 +3,7 @@ import { useRecipe } from "../contexts/RecipeContext"
 import "./FoodList.css"
 
 const FoodList = () => {
-  const { printFood, dispatch } = useRecipe()
+  const { printFood, dispatch, printRecipes } = useRecipe()
 
   return (
     <div className="food-list">
@@ -21,6 +21,7 @@ const FoodList = () => {
           >
             ✖
           </button>
+          {printRecipes.length < 1 && dispatch({ type: "clear" })}
         </div>
       ))}
     </div>
