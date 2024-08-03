@@ -3,7 +3,11 @@ import { useRecipe } from "../contexts/RecipeContext"
 import "./FoodList.css"
 
 const FoodList = () => {
-  const { printFood, dispatch, printRecipes } = useRecipe()
+  const { printFood, dispatch } = useRecipe()
+
+  function handleClick() {
+    dispatch({ type: "clear" })
+  }
 
   return (
     <div className="food-list">
@@ -21,9 +25,15 @@ const FoodList = () => {
           >
             ✖
           </button>
-          {printRecipes.length < 1 && dispatch({ type: "clear" })}
         </div>
       ))}
+
+      <div className="delete-all">
+        <p>Delete All</p>
+        <button className="delete-all-btn" onClick={handleClick}>
+          ❌
+        </button>
+      </div>
     </div>
   )
 }
