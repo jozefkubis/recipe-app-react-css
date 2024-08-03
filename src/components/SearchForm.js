@@ -1,4 +1,5 @@
 // komponent pre formulár
+import { memo } from "react"
 import { useRecipe } from "../contexts/RecipeContext"
 import "./SearchForm.css"
 
@@ -26,4 +27,4 @@ const SearchForm = () => {
   )
 }
 
-export default SearchForm
+export default memo(SearchForm)

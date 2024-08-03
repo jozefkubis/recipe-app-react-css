@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { useRecipe } from "../contexts/RecipeContext"
 import "./FoodList.css"
 
@@ -26,4 +27,4 @@ const FoodList = () => {
   )
 }
 
-export default FoodList
+export default memo(FoodList)
