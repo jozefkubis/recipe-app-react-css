@@ -19,7 +19,7 @@ const FoodList = () => {
               })
             }}
           >
-            x
+            ✖
           </button>
         </div>
       ))}

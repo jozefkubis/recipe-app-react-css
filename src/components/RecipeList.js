@@ -23,11 +23,11 @@ const RecipeList = () => {
             <h3 className="recipe-title">
               {label}{" "}
               <button
-                className="recipe-btn"
+                // className="recipe-btn"
                 style={{ cursor: "pointer" }}
                 onClick={() => handleRemove(recipe)}
               >
-                x
+                ✖
               </button>
             </h3>
             <div className="div-flex1">

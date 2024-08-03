@@ -8,10 +8,15 @@ function handleClick() {
 }
 
 const SearchForm = () => {
-  const { searchingForFood, printFoodOnPg, dispatch } = useRecipe()
+  const { searchingForFood, printFoodOnPg, dispatch, printRecipes } =
+    useRecipe()
 
   return (
-    <form className="form" onSubmit={printFoodOnPg} onClick={handleClick}>
+    <form
+      className={printRecipes.length < 1 ? "form" : "form search-form"}
+      onSubmit={printFoodOnPg}
+      onClick={handleClick}
+    >
       <input
         className="form-input"
         type="text"
@@ -22,7 +27,7 @@ const SearchForm = () => {
         }
       />
       <button className="search-btn">Search</button>
-      <p className="empty-input">You didn't type any ingredient!</p>
+      <p className="empty-input">You didn't type any ingredient! 🍕</p>
     </form>
   )
 }
