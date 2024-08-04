@@ -1,9 +1,10 @@
 // komponent pre zoznam receptov
 import { useRecipe } from "../contexts/RecipeContext"
 import "./RecipeList.css"
+import Loader from "./Loader"
 
 const RecipeList = () => {
-  const { printRecipes, dispatch } = useRecipe()
+  const { printRecipes, dispatch, loading } = useRecipe()
 
   const handleRemove = (recipe) => {
     dispatch({
@@ -69,6 +70,7 @@ const RecipeList = () => {
           </li>
         )
       })}
+      {loading && <Loader />}
     </ol>
   )
 }

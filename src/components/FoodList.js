@@ -6,7 +6,7 @@ const FoodList = () => {
   const { printFood, dispatch } = useRecipe()
 
   function handleClick() {
-    dispatch({ type: "clear" })
+    dispatch({ type: "setPrintFood", payload: [] })
   }
 
   return (

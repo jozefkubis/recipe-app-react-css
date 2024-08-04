@@ -1,5 +1,12 @@
-import { createContext, useContext, useReducer, useEffect } from "react"
+import {
+  createContext,
+  useContext,
+  useReducer,
+  useEffect,
+  useState,
+} from "react"
 import getRecipes from "../hooks/getRecipes"
+import Error from "../components/Error"
 
 const RecipeContext = createContext()
 
@@ -29,16 +36,22 @@ function RecipeProvider({ children }) {
     reducer,
     initialState
   )
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const printFoodJoin = printFood.join(",")
 
     const fetchRecipes = async () => {
+      setLoading(true)
       const recipes = await getRecipes(printFoodJoin)
-      dispatch({
-        type: "setPrintRecipes",
-        payload: recipes.hits.map((hit) => hit.recipe),
-      })
+      setLoading(false)
+
+      if (recipes) {
+        dispatch({
+          type: "setPrintRecipes",
+          payload: recipes.hits.map((hit) => hit.recipe),
+        })
+      }
 
       if (!printFood.length) {
         document.querySelector(".form").classList.remove("search-form")
@@ -76,6 +89,7 @@ function RecipeProvider({ children }) {
         printRecipes,
         printFoodOnPg,
         dispatch,
+        loading,
       }}
     >
       {children}
