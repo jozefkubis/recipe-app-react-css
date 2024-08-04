@@ -28,7 +28,10 @@ const FoodList = () => {
         </div>
       ))}
 
-      <div className="delete-all">
+      <div
+        className="delete-all"
+        style={{ display: printFood.length < 1 && "none" }}
+      >
         <p>Delete All</p>
         <button className="delete-all-btn" onClick={handleClick}>
           ❌
