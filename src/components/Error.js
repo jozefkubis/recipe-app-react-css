@@ -1,9 +1,9 @@
-function Error() {
+function Error({ message }) {
   return (
     <p className="error">
-      <span>💥</span> There was an error fecthing questions.
+      <span>💥</span> {message}
     </p>
-  );
+  )
 }
 
-export default Error;
+export default Error

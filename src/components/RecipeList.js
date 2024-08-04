@@ -2,9 +2,10 @@
 import { useRecipe } from "../contexts/RecipeContext"
 import "./RecipeList.css"
 import Loader from "./Loader"
+import Error from "./Error"
 
 const RecipeList = () => {
-  const { printRecipes, dispatch, loading } = useRecipe()
+  const { printRecipes, dispatch, loading, error } = useRecipe()
 
   const handleRemove = (recipe) => {
     dispatch({
@@ -71,6 +72,7 @@ const RecipeList = () => {
         )
       })}
       {loading && <Loader />}
+      {error && <Error message={error} />}
     </ol>
   )
 }

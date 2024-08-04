@@ -6,7 +6,7 @@ import {
   useState,
 } from "react"
 import getRecipes from "../hooks/getRecipes"
-import Error from "../components/Error"
+// import Error from "../components/Error"
 
 const RecipeContext = createContext()
 
@@ -14,6 +14,7 @@ const initialState = {
   searchingForFood: "",
   printFood: [],
   printRecipes: [],
+  error: null, // pridajte stav pre chyby
 }
 
 function reducer(state, action) {
@@ -24,6 +25,8 @@ function reducer(state, action) {
       return { ...state, printFood: action.payload }
     case "setPrintRecipes":
       return { ...state, printRecipes: action.payload }
+    case "setError":
+      return { ...state, error: "Something went wrong with fetching data!" }
     case "clear":
       return initialState
     default:
@@ -32,10 +35,8 @@ function reducer(state, action) {
 }
 
 function RecipeProvider({ children }) {
-  const [{ searchingForFood, printFood, printRecipes }, dispatch] = useReducer(
-    reducer,
-    initialState
-  )
+  const [{ searchingForFood, printFood, printRecipes, error }, dispatch] =
+    useReducer(reducer, initialState)
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -43,21 +44,26 @@ function RecipeProvider({ children }) {
 
     const fetchRecipes = async () => {
       setLoading(true)
-      const recipes = await getRecipes(printFoodJoin)
-      setLoading(false)
+      try {
+        const recipes = await getRecipes(printFoodJoin)
+        setLoading(false)
 
-      if (recipes) {
-        dispatch({
-          type: "setPrintRecipes",
-          payload: recipes.hits.map((hit) => hit.recipe),
-        })
-      }
+        if (recipes) {
+          dispatch({
+            type: "setPrintRecipes",
+            payload: recipes.hits.map((hit) => hit.recipe),
+          })
+        }
 
-      if (!printFood.length) {
-        document.querySelector(".form").classList.remove("search-form")
-        document
-          .querySelector(".empty-input")
-          .classList.remove("not-empty-input")
+        if (!printFood.length) {
+          document.querySelector(".form").classList.remove("search-form")
+          document
+            .querySelector(".empty-input")
+            .classList.remove("not-empty-input")
+        }
+      } catch (error) {
+        setLoading(false)
+        dispatch({ type: "setError" })
       }
     }
 
@@ -90,6 +96,7 @@ function RecipeProvider({ children }) {
         printFoodOnPg,
         dispatch,
         loading,
+        error,
       }}
     >
       {children}
